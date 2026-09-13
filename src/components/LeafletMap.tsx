@@ -40,6 +40,7 @@ export default function LeafletMap({
   const layerRef = useRef<any>(null);
   const pickMarkerRef = useRef<any>(null);
   const leafletRef = useRef<any>(null);
+  const [ready, setReady] = useState(false);
   const callbacksRef = useRef({ onPick, onMarkerClick });
   callbacksRef.current = { onPick, onMarkerClick };
 
@@ -68,6 +69,7 @@ export default function LeafletMap({
         callbacksRef.current.onPick?.(e.latlng.lat, e.latlng.lng);
       });
       mapRef.current = map;
+      setReady(true);
     })();
     return () => {
       destroyed = true;
