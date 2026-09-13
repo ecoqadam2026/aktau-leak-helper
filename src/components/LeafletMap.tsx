@@ -97,10 +97,11 @@ export default function LeafletMap({
       m.on("click", () => callbacksRef.current.onMarkerClick?.(r));
       m.addTo(layer);
     }
-  }, [reports]);
+  }, [reports, ready]);
 
   // Маркер выбранной точки
   useEffect(() => {
+    if (!ready) return;
     const L = leafletRef.current;
     const map = mapRef.current;
     if (!L || !map) return;
