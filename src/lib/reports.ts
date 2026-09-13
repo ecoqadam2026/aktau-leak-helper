@@ -11,8 +11,7 @@ export interface Report {
   lat: number;
   lng: number;
   description: string;
-  photo?: string; // dataURL
-  address?: string;
+  photo?: string | undefined; // dataURL
   createdAt: number;
   status: ReportStatus;
   analysis: LeakAnalysis;
