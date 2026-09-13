@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import type { Report, ReportStatus } from "@/lib/reports";
 
 interface Props {
@@ -81,6 +81,7 @@ export default function LeafletMap({
 
   // Маркеры заявок
   useEffect(() => {
+    if (!ready) return;
     const L = leafletRef.current;
     const layer = layerRef.current;
     if (!L || !layer) return;
