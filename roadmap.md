@@ -1,0 +1,3 @@
+- [ ] Add RU/KZ language system and persistent choice
+- [ ] Translate all screens and shared labels
+- [ ] Verify switching and persistence
