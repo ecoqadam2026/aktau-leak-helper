@@ -118,7 +118,7 @@ export default function LeafletMap({
       });
       pickMarkerRef.current = L.marker([picked.lat, picked.lng], { icon }).addTo(map);
     }
-  }, [picked, pickMode]);
+  }, [picked, pickMode, ready]);
 
   return <div ref={ref} className={className} style={{ touchAction: "pan-x pan-y" }} />;
 }
