@@ -13,6 +13,7 @@ import { Route as IndexRouteImport } from './routes/index'
 import { Route as DispatcherRouteImport } from './routes/dispatcher'
 import { Route as ReportRouteImport } from './routes/report'
 import { Route as RequestsRouteImport } from './routes/requests'
+import { Route as StatsRouteImport } from './routes/stats'
 import { Route as ResultIdRouteImport } from './routes/result.$id'
 
 const IndexRoute = IndexRouteImport.update({
@@ -35,6 +36,11 @@ const RequestsRoute = RequestsRouteImport.update({
   path: '/requests',
   getParentRoute: () => rootRouteImport,
 } as any)
+const StatsRoute = StatsRouteImport.update({
+  id: '/stats',
+  path: '/stats',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ResultIdRoute = ResultIdRouteImport.update({
   id: '/result/$id',
   path: '/result/$id',
@@ -46,6 +52,7 @@ export interface FileRoutesByFullPath {
   '/dispatcher': typeof DispatcherRoute
   '/report': typeof ReportRoute
   '/requests': typeof RequestsRoute
+  '/stats': typeof StatsRoute
   '/result/$id': typeof ResultIdRoute
 }
 export interface FileRoutesByTo {
@@ -53,6 +60,7 @@ export interface FileRoutesByTo {
   '/dispatcher': typeof DispatcherRoute
   '/report': typeof ReportRoute
   '/requests': typeof RequestsRoute
+  '/stats': typeof StatsRoute
   '/result/$id': typeof ResultIdRoute
 }
 export interface FileRoutesById {
@@ -61,14 +69,23 @@ export interface FileRoutesById {
   '/dispatcher': typeof DispatcherRoute
   '/report': typeof ReportRoute
   '/requests': typeof RequestsRoute
+  '/stats': typeof StatsRoute
   '/result/$id': typeof ResultIdRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/dispatcher' | '/report' | '/requests' | '/result/$id'
+  fullPaths:
+    '/' | '/dispatcher' | '/report' | '/requests' | '/stats' | '/result/$id'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/dispatcher' | '/report' | '/requests' | '/result/$id'
-  id: '__root__' | '/' | '/dispatcher' | '/report' | '/requests' | '/result/$id'
+  to: '/' | '/dispatcher' | '/report' | '/requests' | '/stats' | '/result/$id'
+  id:
+    | '__root__'
+    | '/'
+    | '/dispatcher'
+    | '/report'
+    | '/requests'
+    | '/stats'
+    | '/result/$id'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -76,6 +93,7 @@ export interface RootRouteChildren {
   DispatcherRoute: typeof DispatcherRoute
   ReportRoute: typeof ReportRoute
   RequestsRoute: typeof RequestsRoute
+  StatsRoute: typeof StatsRoute
   ResultIdRoute: typeof ResultIdRoute
 }
 
@@ -109,6 +127,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof RequestsRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/stats': {
+      id: '/stats'
+      path: '/stats'
+      fullPath: '/stats'
+      preLoaderRoute: typeof StatsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/result/$id': {
       id: '/result/$id'
       path: '/result/$id'
@@ -124,6 +149,7 @@ const rootRouteChildren: RootRouteChildren = {
   DispatcherRoute: DispatcherRoute,
   ReportRoute: ReportRoute,
   RequestsRoute: RequestsRoute,
+  StatsRoute: StatsRoute,
   ResultIdRoute: ResultIdRoute,
 }
 export const routeTree = rootRouteImport
